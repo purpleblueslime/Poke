@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="black" xmlns="http://www.w3.org/2000/svg">
+  <!-- Centered lens -->
+  <circle cx="32" cy="32" r="16" />
+
+  <!-- Handle connected at 45° from (40, 40) -->
+  <g transform="rotate(45 40 40)">
+    <rect x="40" y="40" width="12" height="3.5" rx="1.75" ry="1.75" />
+  </g>
+</svg>
