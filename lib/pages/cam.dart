@@ -33,11 +33,17 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
   dynamic _radius = 55.0;
 
   dynamic initCamera() async {
-    id = await channel.invokeMethod('startCamera');
+    try {
+      id = await channel.invokeMethod('startCamera');
 
-    setState(() {
-      cameraReady = true;
-    });
+      setState(() {
+        cameraReady = true;
+      });
+    } catch (_) {
+      setState(() {
+        cameraReady = false; // user didnt give permission to cam ;-;
+      });
+    }
   }
 
   initOptions(channel) {
@@ -149,19 +155,19 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
     }
 
     toggleFlash() async {
-      if (isRecording) return; // uh otherwise breaks ;-;
+      if (isRecording || !cameraReady) return; // uh otherwise breaks ;-;
       await channel.invokeMethod('toggleFlash');
       await setOptions({'isFlash': !options['isFlash']});
     }
 
     toggleNoise() async {
-      if (isRecording) return; // same ;-;
+      if (isRecording || !cameraReady) return; // same ;-;
       await channel.invokeMethod('toggleNoise');
       await setOptions({'isNoise': !options['isNoise']});
     }
 
     toggleCamera() async {
-      if (isRecording) return; // sme
+      if (isRecording || !cameraReady) return; // sme
       await channel.invokeMethod('toggleCamera');
       await channel.invokeMethod('stopCamera'); // kill cam
       await initCamera(); // reinit
