@@ -46,27 +46,11 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
     }
   }
 
-  initOptions(channel) {
-    Future.microtask(() async {
-      dynamic usr = Provider.of<UserPro>(context, listen: false);
-      dynamic options = usr.options;
-
-      if (options['isFlash']) {
-        await channel.invokeMethod('toggleFlash');
-      }
-      if (!options['isNoise']) {
-        await channel.invokeMethod('toggleNoise');
-      }
-    });
-  }
-
   @override
   initState() {
     super.initState();
 
     channel = MethodChannel('poke_camera');
-
-    initOptions(channel);
     initCamera();
 
     ani = AnimationController(duration: Duration(seconds: 1), vsync: this)
@@ -80,7 +64,7 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
 
   late XFile videoFile;
   dynamic isRecording = false;
-  dynamic max = 30;
+  dynamic max = 5; // only allow 3secs snaps (vercel back limit) ;-; (fix maybe)
   dynamic timeRn = 0;
 
   poke(file, whatIs) async {
@@ -144,7 +128,10 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
 
       if (isRecording) return;
 
-      await channel.invokeMethod('startRecording');
+      await channel.invokeMethod('startRecording', {
+        'flash': options['isFlash'],
+        'noise': options['isNoise'],
+      });
 
       setState(() {
         _radius = 20.0;
@@ -155,21 +142,18 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
     }
 
     toggleFlash() async {
-      if (isRecording || !cameraReady) return; // uh otherwise breaks ;-;
-      await channel.invokeMethod('toggleFlash');
+      if (isRecording || !cameraReady || poking) return; // otherwise breaks ;-;
       await setOptions({'isFlash': !options['isFlash']});
     }
 
     toggleNoise() async {
-      if (isRecording || !cameraReady) return; // same ;-;
-      await channel.invokeMethod('toggleNoise');
+      if (isRecording || !cameraReady || poking) return; // same ;-;
       await setOptions({'isNoise': !options['isNoise']});
     }
 
     toggleCamera() async {
-      if (isRecording || !cameraReady) return; // sme
+      if (isRecording || !cameraReady || poking) return; // sme
       await channel.invokeMethod('toggleCamera');
-      await channel.invokeMethod('stopCamera'); // kill cam
       await initCamera(); // reinit
     }
 
@@ -181,7 +165,9 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
         poking = true;
       });
 
-      dynamic path = await channel.invokeMethod('takePhoto');
+      dynamic path = await channel.invokeMethod('takePhoto', {
+        'flash': options['isFlash'],
+      });
       XFile file = XFile(path);
       poke(file, 'img');
     }

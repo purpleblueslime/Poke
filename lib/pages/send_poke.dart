@@ -36,7 +36,7 @@ class _SendPoke extends State<SendPoke> {
   dynamic all = false;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     file = widget.file;
     whatis = widget.whatis;
@@ -138,6 +138,8 @@ class _SendPoke extends State<SendPoke> {
   }
 
   toggleAll() {
+    if (sending) return; // ooops forgot :p
+
     setState(() {
       if (!all || uids.isEmpty) {
         for (dynamic u in users) {
