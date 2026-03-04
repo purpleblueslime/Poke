@@ -19,6 +19,13 @@ class Cam extends StatefulWidget {
 }
 
 class _Cam extends State<Cam> with TickerProviderStateMixin {
+  dynamic filters = [
+    {'nick': 'Swipe to apply filters'}, // no filter
+    {'nick': 'Interstellar', 'img': 'interstellar.jpg'},
+    {'nick': 'Batman', 'img': 'batman.jpg'},
+    {'nick': 'Breaking Bad', 'img': 'breaking_bad.jpg'},
+  ];
+
   late MethodChannel channel;
   dynamic id;
 
@@ -31,6 +38,8 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
   late AnimationController ani;
   late Animation<Color?> blinkingColor;
   dynamic _radius = 55.0;
+
+  dynamic filter = 0; // uh need for toggleCam
 
   dynamic initCamera() async {
     try {
@@ -51,6 +60,7 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
     super.initState();
 
     channel = MethodChannel('poke_camera');
+
     initCamera();
 
     ani = AnimationController(duration: Duration(seconds: 1), vsync: this)
@@ -155,6 +165,7 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
       if (isRecording || !cameraReady || poking) return; // sme
       await channel.invokeMethod('toggleCamera');
       await initCamera(); // reinit
+      await channel.invokeMethod('changeFilter', {'id': filter});
     }
 
     takePhoto() async {
@@ -242,11 +253,91 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
             ),
             Positioned(
               top: MediaQuery.of(context).padding.top + 90, // safeBar + 30
+              right: 0,
+              left: 0,
+              child: SizedBox(
+                height: 90,
+                child: PageView.builder(
+                  controller: PageController(
+                    initialPage: filters.length * 1000,
+                  ), // to get them back swipes ;)
+                  onPageChanged: (item) async {
+                    dynamic id = item % filters.length;
+                    await channel.invokeMethod('changeFilter', {'id': id});
+                    setState(() {
+                      filter = id; // inf swipes
+                    });
+                  },
+                  itemCount: filters.length * 2000, // not really inf but works
+                  itemBuilder: (context, itm) {
+                    dynamic item = itm % filters.length; // inf swipes also
+                    return Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          isRecording || poking
+                              ? SizedBox.shrink()
+                              : Text(
+                                filters[item]['nick'],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                          SizedBox(width: 10),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                height: 65,
+                                width: 65,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.transparent,
+                                    width: 5,
+                                  ),
+                                ),
+                                child:
+                                    item == 0
+                                        ? Center(
+                                          child: SvgPicture.asset(
+                                            'images/gesture.svg',
+                                            height: 30,
+                                            width: 30,
+                                            colorFilter: ColorFilter.mode(
+                                              Colors.white,
+                                              BlendMode.srcIn,
+                                            ),
+                                            alignment: Alignment.center,
+                                          ),
+                                        )
+                                        : ClipOval(
+                                          child: Image.asset(
+                                            'images/${filters[item]['img']}',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 180, // safeBar + 120
               right: 10,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                   child: Column(
                     children: [
                       ElevatedButton(
