@@ -352,7 +352,7 @@ class _OpenGallery extends State<OpenGallery> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w900,
-                                    color: Color(0xff80ffcc),
+                                    color: Color(0xff00c8ff),
                                   ),
                                 ),
                             SizedBox(width: 2.5),
@@ -365,7 +365,7 @@ class _OpenGallery extends State<OpenGallery> {
                               colorFilter: ColorFilter.mode(
                                 poke['geo'] == null
                                     ? Colors.white
-                                    : Color(0xff80ffcc),
+                                    : Color(0xff00c8ff),
                                 BlendMode.srcIn,
                               ),
                               alignment: Alignment.center,

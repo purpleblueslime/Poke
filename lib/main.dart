@@ -67,7 +67,7 @@ class _App extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     // listen to logout gracefully (we dont care about logout we just remove token)
     dynamic usrListen = Provider.of<UserPro>(context);
-    Color tealColor = Color(0xff7ceece);
+    Color tealColor = Color(0xff00c8ff);
 
     return MaterialApp(
       theme: ThemeData(

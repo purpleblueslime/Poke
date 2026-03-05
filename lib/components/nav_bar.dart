@@ -96,7 +96,7 @@ class _NavBar extends State<NavBar> {
                                 width: 15,
                                 height: 15,
                                 decoration: BoxDecoration(
-                                  color: Color(0xff7ceece),
+                                  color: Color(0xff00c8ff),
                                   shape: BoxShape.circle,
                                 ),
                               )
@@ -140,7 +140,7 @@ class _NavBar extends State<NavBar> {
                                 width: 15,
                                 height: 15,
                                 decoration: BoxDecoration(
-                                  color: Color(0xff7ceece),
+                                  color: Color(0xff00c8ff),
                                   shape: BoxShape.circle,
                                 ),
                               ),
