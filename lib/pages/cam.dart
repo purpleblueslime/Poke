@@ -67,8 +67,8 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
       ..repeat(reverse: true);
 
     blinkingColor = ColorTween(
-      begin: Color(0xff7ceece).withOpacity(0),
-      end: Color(0xff7ceece).withOpacity(1),
+      begin: Color(0xff00c8ff).withOpacity(0),
+      end: Color(0xff00c8ff).withOpacity(1),
     ).animate(ani);
   }
 
@@ -204,7 +204,7 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
                 child:
                     poking
                         ? LoadingAnimationWidget.beat(
-                          color: Color(0xff7ceece),
+                          color: Color(0xff00c8ff),
                           size: 100,
                         )
                         : GestureDetector(
@@ -243,7 +243,7 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
                                 color:
                                     _radius == 55.0
                                         ? Colors.white
-                                        : Color(0xff7ceece),
+                                        : Color(0xff00c8ff),
                                 borderRadius: BorderRadius.circular(_radius),
                               ),
                             ),
@@ -426,7 +426,7 @@ class _Cam extends State<Cam> with TickerProviderStateMixin {
                       )
                       : SizedBox.shrink(),
             ),
-            SafeBar(title: 'Poke~'),
+            SafeBar(title: 'Poke'),
             NavBar(dontOpen: 'cam'),
           ],
         ),

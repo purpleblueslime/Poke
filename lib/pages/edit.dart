@@ -251,7 +251,7 @@ class _Edit extends State<Edit> {
                                 backgroundColor:
                                     nickLen > 10 || nick.text.isEmpty
                                         ? Colors.black
-                                        : Color(0xff7ceece),
+                                        : Color(0xff00c8ff),
                               ),
                               child:
                                   uploading

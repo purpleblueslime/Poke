@@ -133,8 +133,8 @@ class _Chat extends State<Chat> {
                                     shape: BoxShape.circle,
                                     color:
                                         !poke['allowSave']
-                                            ? Color(0xfffd95fd)
-                                            : Color(0xff7ceece),
+                                            ? Color(0xffffe135)
+                                            : Color(0xff00c8ff),
                                   ),
                                 )
                                 : SizedBox.shrink(),
@@ -178,7 +178,7 @@ class _Chat extends State<Chat> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w900,
-                              color: Color(0xff80ffcc),
+                              color: Color(0xff00c8ff),
                             ),
                             softWrap: true,
                           ),
@@ -191,7 +191,7 @@ class _Chat extends State<Chat> {
                       height: 25,
                       width: 25,
                       colorFilter: ColorFilter.mode(
-                        poke['geo'] == null ? Colors.white : Color(0xff80ffcc),
+                        poke['geo'] == null ? Colors.white : Color(0xff00c8ff),
                         BlendMode.srcIn,
                       ),
                       alignment: Alignment.center,
@@ -248,9 +248,9 @@ class _Chat extends State<Chat> {
                                         ? BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              Color(0xff80ffcc),
-                                              Color(0xffaafeea),
-                                              Colors.tealAccent,
+                                              Color(0xff00c8ff),
+                                              Color(0xff69defe),
+                                              Color(0xff00aaff),
                                             ],
                                             begin: Alignment.bottomRight,
                                             end: Alignment.topLeft,

@@ -138,7 +138,7 @@ class _OpenPoke extends State<OpenPoke> {
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w900,
-                                    color: Color(0xff80ffcc),
+                                    color: Color(0xff00c8ff),
                                   ),
                                 ),
                             SizedBox(width: 4),
@@ -151,7 +151,7 @@ class _OpenPoke extends State<OpenPoke> {
                               colorFilter: ColorFilter.mode(
                                 poke['geo'] == null
                                     ? Colors.white
-                                    : Color(0xff80ffcc),
+                                    : Color(0xff00c8ff),
                                 BlendMode.srcIn,
                               ),
                               alignment: Alignment.center,
@@ -219,9 +219,9 @@ class _OpenPoke extends State<OpenPoke> {
                                         ? BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              Color(0xff80ffcc),
-                                              Color(0xffaafeea),
-                                              Colors.tealAccent,
+                                              Color(0xff00c8ff),
+                                              Color(0xff69defe),
+                                              Color(0xff00aaff),
                                             ],
                                             begin: Alignment.bottomRight,
                                             end: Alignment.topLeft,

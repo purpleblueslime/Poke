@@ -259,9 +259,9 @@ class _LoginNew extends State<LoginNew> {
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
                                         colors: [
-                                          Color(0xff80ffcc),
-                                          Color(0xffaafeea),
-                                          Colors.tealAccent,
+                                          Color(0xff00c8ff),
+                                          Color(0xff69defe),
+                                          Color(0xff00aaff),
                                         ],
                                       ),
                                       borderRadius: BorderRadius.circular(40),

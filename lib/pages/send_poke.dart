@@ -229,7 +229,7 @@ class _SendPoke extends State<SendPoke> {
                     height: 15,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xff7ceece),
+                      color: Color(0xff00c8ff),
                     ),
                   )
                   : uids.contains(friend['uid']) && !allowSave
@@ -238,7 +238,7 @@ class _SendPoke extends State<SendPoke> {
                     height: 15,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xfffd95fd),
+                      color: Color(0xffffe135),
                     ),
                   )
                   : Container(
@@ -359,7 +359,7 @@ class _SendPoke extends State<SendPoke> {
                                     ),
                                   ),
                                   Text(
-                                    'Poking~',
+                                    'Poking',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -409,8 +409,8 @@ class _SendPoke extends State<SendPoke> {
                                   shape: BoxShape.circle,
                                   color:
                                       !allowSave
-                                          ? Color(0xfffd95fd)
-                                          : Color(0xff7ceece),
+                                          ? Color(0xffffe135)
+                                          : Color(0xff00c8ff),
                                 ),
                               ),
                             ],
@@ -447,7 +447,7 @@ class _SendPoke extends State<SendPoke> {
                                 SizedBox(height: 10),
                                 Center(
                                   child: Text(
-                                    'No friends to poke-',
+                                    'No friends to poke',
                                     style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w900,
@@ -496,9 +496,9 @@ class _SendPoke extends State<SendPoke> {
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Color(0xff80ffcc),
-                                      Color(0xffaafeea),
-                                      Colors.tealAccent,
+                                      Color(0xff00c8ff),
+                                      Color(0xff69defe),
+                                      Color(0xff00aaff),
                                     ],
                                     begin: Alignment.bottomRight,
                                     end: Alignment.topLeft,
@@ -514,7 +514,7 @@ class _SendPoke extends State<SendPoke> {
                                           )
                                           : allowSave
                                           ? Text(
-                                            'poke~',
+                                            'poke!',
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w900,
@@ -522,7 +522,7 @@ class _SendPoke extends State<SendPoke> {
                                             ),
                                           )
                                           : SvgPicture.asset(
-                                            'images/heart.svg',
+                                            'images/chat_send.svg',
                                             height: 40,
                                             width: 40,
                                             colorFilter: ColorFilter.mode(
@@ -562,9 +562,9 @@ class _SendPoke extends State<SendPoke> {
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Color(0xffff7ce1),
-                                      Color(0xffffaeff),
-                                      Color(0xffff77ff),
+                                      Color(0xffffe135),
+                                      Color(0xffffee91),
+                                      Color(0xfffff535),
                                     ],
                                     begin: Alignment.bottomRight,
                                     end: Alignment.topLeft,
@@ -580,7 +580,7 @@ class _SendPoke extends State<SendPoke> {
                                           )
                                           : !allowSave
                                           ? Text(
-                                            'ghost~',
+                                            'ghost*',
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w900,
@@ -588,7 +588,7 @@ class _SendPoke extends State<SendPoke> {
                                             ),
                                           )
                                           : SvgPicture.asset(
-                                            'images/near_me.svg',
+                                            'images/bolt.svg',
                                             height: 40,
                                             width: 40,
                                             colorFilter: ColorFilter.mode(
