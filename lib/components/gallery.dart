@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:poke/components/poke_thumbnail.dart';
 import 'package:provider/provider.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import '../user_provider.dart';
-import 'poke_video.dart';
 import '../pages/open_gallery.dart';
 import './call_api.dart';
 
@@ -69,7 +69,6 @@ class Gallery extends StatelessWidget {
                           width: w,
                           fit: BoxFit.cover,
                           cache: true,
-                          cacheMaxAge: Duration(days: 1),
                           loadStateChanged: (state) {
                             if (state.extendedImageLoadState ==
                                 LoadState.completed) {
@@ -79,11 +78,12 @@ class Gallery extends StatelessWidget {
                             }
                           },
                         )
-                        : PokeVideo(
+                        : PokeThumbnail(
                           url: apiUrl(
-                            '/poke/saved?token=${userProvider.token}&id=${poke['id']}',
+                            '/poke/saved?id=${poke['id']}&token=${userProvider.token}',
                           ),
-                          thumbnail: true,
+                          height: w,
+                          width: w,
                         ),
                   ],
                 ),

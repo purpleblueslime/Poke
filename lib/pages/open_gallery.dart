@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:poke/components/poke_thumbnail.dart';
 import 'package:provider/provider.dart';
 import '../user_provider.dart';
 import '../components/call_api.dart';
@@ -97,7 +98,7 @@ class _OpenGallery extends State<OpenGallery> {
           ),
           content: popUp(context, [
             SizedBox(
-              width: 160, // w 1080 in ':'
+              width: 160.0, // w 1080 in ':'
               height: 284.44, // h 1920 in ':'
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
@@ -118,11 +119,12 @@ class _OpenGallery extends State<OpenGallery> {
                             }
                           },
                         )
-                        : PokeVideo(
+                        : PokeThumbnail(
                           url: apiUrl(
-                            '/poke/saved?token=${usr.token}&id=${poke['id']}',
+                            '/poke/saved?id=${poke['id']}&token=${usr.token}',
                           ),
-                          thumbnail: true,
+                          width: 160.0, // w 1080 in ':' (same-same)
+                          height: 284.44, // h 1920 in ':' (same-same)
                         ),
               ),
             ),
@@ -166,11 +168,32 @@ class _OpenGallery extends State<OpenGallery> {
                 return;
               },
               style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
               ),
-              child: Text('delete', style: TextStyle(fontSize: 19)),
+              child: Ink(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 12,
+                  bottom: 12,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xffff495e),
+                      Color(0xfffe5e93),
+                      Color(0xffff6d77),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text('delete', style: TextStyle(fontSize: 19)),
+              ),
             ),
           ]),
         ),
@@ -264,7 +287,12 @@ class _OpenGallery extends State<OpenGallery> {
                                       LoadState.completed) {
                                     return null;
                                   } else {
-                                    return SizedBox.shrink();
+                                    return Center(
+                                      child: LoadingAnimationWidget.waveDots(
+                                        color: Colors.white,
+                                        size: 40,
+                                      ),
+                                    );
                                   }
                                 },
                               )
@@ -273,7 +301,7 @@ class _OpenGallery extends State<OpenGallery> {
                                   poke['id'],
                                 ), // uhhh need this otherwise it wont change vid on swipe
                                 url: apiUrl(
-                                  '/poke/saved?token=${usr.token}&id=${poke['id']}',
+                                  '/poke/saved?id=${poke['id']}&token=${usr.token}',
                                 ),
                               ),
                     ),

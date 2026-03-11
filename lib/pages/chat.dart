@@ -54,60 +54,22 @@ class _Chat extends State<Chat> {
               children: [
                 Row(
                   children: [
-                    RepaintBoundary(
-                      child: Stack(
-                        children: [
-                          ClipOval(
-                            child: ExtendedImage.network(
-                              imgUrl(poke['by']['uid']),
-                              height: 72,
-                              width: 72,
-                              fit: BoxFit.cover,
-                              cache: true,
-                              cacheMaxAge: Duration(days: 1),
-                              loadStateChanged: (state) {
-                                if (state.extendedImageLoadState ==
-                                    LoadState.completed) {
-                                  return null;
-                                } else {
-                                  return SizedBox.shrink();
-                                }
-                              },
-                            ),
-                          ),
-                          poke['by']['streaks'] <= 0
-                              ? SizedBox.shrink()
-                              : Positioned(
-                                bottom: 0,
-                                right: 0,
-                                child: Container(
-                                  padding: EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        'images/mending-heart.svg',
-                                        height: 15,
-                                        width: 15,
-                                      ),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        '${poke['by']['streaks']}',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                        ],
+                    ClipOval(
+                      child: ExtendedImage.network(
+                        imgUrl(poke['by']['uid']),
+                        height: 72,
+                        width: 72,
+                        fit: BoxFit.cover,
+                        cache: true,
+                        cacheMaxAge: Duration(days: 1),
+                        loadStateChanged: (state) {
+                          if (state.extendedImageLoadState ==
+                              LoadState.completed) {
+                            return null;
+                          } else {
+                            return SizedBox.shrink();
+                          }
+                        },
                       ),
                     ),
                     SizedBox(width: 15),

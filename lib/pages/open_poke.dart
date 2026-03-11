@@ -66,7 +66,7 @@ class _OpenPoke extends State<OpenPoke> {
                             apiUrl(
                               '/poke/open?token=${userProvider.token}&id=${poke['id']}',
                             ),
-                            cache: true,
+                            cache: poke['allowSave'],
                             fit: BoxFit.cover,
                             loadStateChanged: (state) {
                               if (state.extendedImageLoadState ==
@@ -78,7 +78,12 @@ class _OpenPoke extends State<OpenPoke> {
                                 });
                                 return null;
                               } else {
-                                return SizedBox.shrink();
+                                return Center(
+                                  child: LoadingAnimationWidget.waveDots(
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                );
                               }
                             },
                           )

@@ -2,6 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:poke/components/chat_bubble.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
 import '../user_provider.dart';
@@ -115,11 +116,32 @@ class _Friend extends State<Friend> {
                 await usr.refresh();
               },
               style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
               ),
-              child: Text('unfriend', style: TextStyle(fontSize: 19)),
+              child: Ink(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 12,
+                  bottom: 12,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xffff495e),
+                      Color(0xfffe5e93),
+                      Color(0xffff6d77),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text('unfriend', style: TextStyle(fontSize: 19)),
+              ),
             ),
           ]),
         ),
@@ -134,129 +156,40 @@ class _Friend extends State<Friend> {
           fit: StackFit.expand,
           children: [
             SingleChildScrollView(
-              child: Stack(
-                children: [
-                  Container(
-                    height: 470,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('images/ghosts_by_slime.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top + 90,
-                      bottom: 10,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 90,
+                  bottom: 10,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
                       children: [
                         SizedBox(
                           width: double.infinity,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  ClipOval(
-                                    child: SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: ExtendedImage.network(
-                                        imgUrl(frnd['uid']),
-                                        fit: BoxFit.cover,
-                                        cache: true,
-                                        cacheMaxAge: Duration(days: 1),
-                                        loadStateChanged: (state) {
-                                          if (state.extendedImageLoadState ==
-                                              LoadState.completed) {
-                                            return null;
-                                          } else {
-                                            return SizedBox.shrink();
-                                          }
-                                        },
-                                      ),
-                                    ),
+                              ClipOval(
+                                child: SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: ExtendedImage.network(
+                                    imgUrl(frnd['uid']),
+                                    fit: BoxFit.cover,
+                                    cache: true,
+                                    cacheMaxAge: Duration(days: 1),
+                                    loadStateChanged: (state) {
+                                      if (state.extendedImageLoadState ==
+                                          LoadState.completed) {
+                                        return null;
+                                      } else {
+                                        return SizedBox.shrink();
+                                      }
+                                    },
                                   ),
-                                  frnd['streaks'] <= 0
-                                      ? SizedBox.shrink()
-                                      : Positioned(
-                                        bottom: 0,
-                                        left: 40,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            30,
-                                          ),
-                                          child: BackdropFilter(
-                                            filter: ImageFilter.blur(
-                                              sigmaX: 10,
-                                              sigmaY: 10,
-                                            ),
-                                            child: Container(
-                                              padding: EdgeInsets.only(
-                                                left: 8,
-                                                right: 8,
-                                                top: 4,
-                                                bottom: 4,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.transparent,
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                              ),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'images/mending-heart.svg',
-                                                    height: 15,
-                                                    width: 15,
-                                                  ),
-                                                  SizedBox(width: 4),
-                                                  ShaderMask(
-                                                    shaderCallback:
-                                                        (bounds) =>
-                                                            LinearGradient(
-                                                              colors: [
-                                                                Color(
-                                                                  0xFFFF498B,
-                                                                ),
-                                                                Colors.white,
-                                                                Colors.white,
-                                                              ],
-                                                            ).createShader(
-                                                              Rect.fromLTWH(
-                                                                0,
-                                                                0,
-                                                                bounds.width,
-                                                                bounds.height,
-                                                              ),
-                                                            ),
-                                                    blendMode: BlendMode.srcIn,
-                                                    child: Text(
-                                                      '${comify(frnd['streaks'])} day streak',
-                                                      style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w900,
-                                                        color:
-                                                            Colors
-                                                                .white, // must be set for ShaderMask to work properly
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                ],
+                                ),
                               ),
                               SizedBox(height: 15),
                               Text(
@@ -297,11 +230,49 @@ class _Friend extends State<Friend> {
                             ],
                           ),
                         ),
-                        Gallery(uid: frnd['uid']),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ChatBubble(
+                              child: Text(
+                                frnd['streaks'] <= 0
+                                    ? '(￣o￣) zzZ'
+                                    : '${comify(frnd['streaks'])} day streak',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 120), // 1x user image + 25
+                            Column(
+                              children: [
+                                SizedBox(height: 40), // 2nd bubble a bit down
+                                ChatBubble(
+                                  left: true,
+                                  child: Text(
+                                    '(๑˃ᴗ˂)ﻭ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: frnd['streaks'] <= 0 ? 20 : 40,
+                            ), // too keep things ✨
+                          ],
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                    Gallery(uid: frnd['uid']),
+                  ],
+                ),
               ),
             ),
             Positioned(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:poke/components/chat_bubble.dart';
 import 'package:provider/provider.dart';
 import '../user_provider.dart';
 import 'package:extended_image/extended_image.dart';
@@ -30,33 +32,23 @@ class _Me extends State<Me> {
           fit: StackFit.expand,
           children: [
             SingleChildScrollView(
-              child: Stack(
-                children: [
-                  Container(
-                    height: 440,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('images/ghosts_by_slime.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 80,
+                  bottom: 56 + 20,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top + 80,
-                      bottom: 56 + 20,
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
                           children: [
                             SizedBox(
                               width: double.infinity,
@@ -111,13 +103,45 @@ class _Me extends State<Me> {
                                 ],
                               ),
                             ),
-                            Gallery(),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ChatBubble(
+                                  child: Text(
+                                    '(つ≧▽≦)つ',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 120), // 1x user image + 25
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
+                                    ), // 2nd bubble a bit down
+                                    ChatBubble(
+                                      left: true,
+                                      child: LoadingAnimationWidget.waveDots(
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 55), // too keep things ✨
+                              ],
+                            ),
                           ],
                         ),
-                      ),
+                        Gallery(),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
             SafeBar(title: user['nick']),
