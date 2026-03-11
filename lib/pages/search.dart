@@ -130,11 +130,32 @@ class _Search extends State<Search> {
                 });
               },
               style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
               ),
-              child: Text('unfriend', style: TextStyle(fontSize: 19)),
+              child: Ink(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 12,
+                  bottom: 12,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xffff495e),
+                      Color(0xfffe5e93),
+                      Color(0xffff6d77),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text('unfriend', style: TextStyle(fontSize: 19)),
+              ),
             ),
           ]),
         ),
@@ -317,15 +338,39 @@ class _Search extends State<Search> {
                       okConfirm(context, u);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
+                      padding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
                     ),
-                    child:
-                        deleteSpin.contains(u['uid'])
-                            ? LoadingAnimationWidget.waveDots(
-                              color: Colors.white,
-                              size: 25,
-                            )
-                            : Text('unfriend', style: TextStyle(fontSize: 15)),
+                    child: Ink(
+                      padding: EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        top: 12,
+                        bottom: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xffff495e),
+                            Color(0xfffe5e93),
+                            Color(0xffff6d77),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child:
+                          deleteSpin.contains(u['uid'])
+                              ? LoadingAnimationWidget.waveDots(
+                                color: Colors.white,
+                                size: 25,
+                              )
+                              : Text(
+                                'unfriend',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                    ),
                   )
                   : ElevatedButton(
                     onPressed: () async {

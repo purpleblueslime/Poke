@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import './user_provider.dart';
 import './pages/cam.dart';
@@ -18,6 +19,9 @@ main() async {
       systemNavigationBarColor: Colors.black,
     ),
   );
+
+  await Hive.initFlutter();
+  await Hive.openBox('thumbs');
 
   final usr = UserPro();
   await usr.init();
