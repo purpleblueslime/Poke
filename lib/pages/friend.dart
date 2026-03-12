@@ -234,10 +234,13 @@ class _Friend extends State<Friend> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            SizedBox(
+                              width: frnd['streaks'] <= 0 ? 10 : 0,
+                            ), // too keep things ✨
                             ChatBubble(
                               child: Text(
                                 frnd['streaks'] <= 0
-                                    ? '(￣o￣) zzZ'
+                                    ? ' ᶻ 𝘇 𐰁 '
                                     : '${comify(frnd['streaks'])} day streak',
                                 style: TextStyle(
                                   fontSize: 15,
@@ -253,7 +256,7 @@ class _Friend extends State<Friend> {
                                 ChatBubble(
                                   left: true,
                                   child: Text(
-                                    '(๑˃ᴗ˂)ﻭ',
+                                    '₍^ >ヮ<^₎',
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w900,
@@ -264,7 +267,7 @@ class _Friend extends State<Friend> {
                               ],
                             ),
                             SizedBox(
-                              width: frnd['streaks'] <= 0 ? 20 : 40,
+                              width: frnd['streaks'] <= 0 ? 0 : 35,
                             ), // too keep things ✨
                           ],
                         ),

@@ -17,27 +17,21 @@ class _PokeVideoState extends State<PokeVideo> {
   late dynamic url;
   BetterPlayerController? betterPlayer;
   dynamic config = false;
-  dynamic loading = false;
+  dynamic loading = true;
 
   onEvent(BetterPlayerEvent event) {
-    if (event.betterPlayerEventType == BetterPlayerEventType.bufferingStart) {
-      setState(() {
-        loading = true;
-      });
-    }
-
-    if (event.betterPlayerEventType == BetterPlayerEventType.bufferingEnd) {
-      setState(() {
-        loading = false;
-      });
-    }
-
     if (event.betterPlayerEventType == BetterPlayerEventType.finished) {
       // uh for ghosting
       if (widget.ghost == null) return;
       if (!mounted) return; // dont pop if not on same page
 
       Navigator.pop(widget.ghost);
+    }
+
+    if (event.betterPlayerEventType == BetterPlayerEventType.play) {
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -48,7 +42,7 @@ class _PokeVideoState extends State<PokeVideo> {
           : BetterPlayerDataSourceType.network,
       url,
       cacheConfiguration: BetterPlayerCacheConfiguration(
-        useCache: true,
+        useCache: widget.ghost == null ? true : false, // dont cache ghost
         maxCacheSize: 5 * 1024 * 1024 * 1024, // 5GB all files combined
         maxCacheFileSize: 5 * 1024 * 1024, // 5MB per file (vercel lim)
       ),
