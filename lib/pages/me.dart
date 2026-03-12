@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:poke/components/chat_bubble.dart';
 import 'package:provider/provider.dart';
 import '../user_provider.dart';
@@ -109,7 +108,7 @@ class _Me extends State<Me> {
                               children: [
                                 ChatBubble(
                                   child: Text(
-                                    '(つ≧▽≦)つ',
+                                    '/ᐠ - ˕ -マ',
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w900,
@@ -125,14 +124,18 @@ class _Me extends State<Me> {
                                     ), // 2nd bubble a bit down
                                     ChatBubble(
                                       left: true,
-                                      child: LoadingAnimationWidget.waveDots(
-                                        color: Colors.white,
-                                        size: 20,
+                                      child: Text(
+                                        ' ᶻ 𝘇 𐰁 ',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 55), // too keep things ✨
+                                SizedBox(width: 20), // too keep things ✨
                               ],
                             ),
                           ],
