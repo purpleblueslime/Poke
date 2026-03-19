@@ -5,10 +5,11 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 
 class PokeThumbnail extends StatefulWidget {
   final dynamic url;
+  final dynamic id;
   final dynamic height;
   final dynamic width;
 
-  const PokeThumbnail({super.key, this.url, this.height, this.width});
+  const PokeThumbnail({super.key, this.url, this.height, this.width, this.id});
 
   @override
   State<PokeThumbnail> createState() => _PokeThumbnailState();
@@ -18,10 +19,10 @@ class _PokeThumbnailState extends State<PokeThumbnail> {
   late dynamic url;
   dynamic file;
 
-  dynamic thumbify(url) async {
+  dynamic thumbify(url, id) async {
     dynamic box = Hive.box('thumbs');
 
-    dynamic exist = box.get(url);
+    dynamic exist = box.get(id);
     if (exist != null) {
       setState(() {
         file = exist;
@@ -35,7 +36,7 @@ class _PokeThumbnailState extends State<PokeThumbnail> {
       quality: 75,
     );
 
-    await box.put(url, data);
+    await box.put(id, data);
     setState(() {
       file = data;
     });
@@ -44,7 +45,7 @@ class _PokeThumbnailState extends State<PokeThumbnail> {
   @override
   initState() {
     super.initState();
-    thumbify(widget.url);
+    thumbify(widget.url, widget.id);
   }
 
   @override

@@ -82,6 +82,7 @@ class Gallery extends StatelessWidget {
                           url: apiUrl(
                             '/poke/saved?id=${poke['id']}&token=${userProvider.token}',
                           ),
+                          id: poke['id'],
                           height: w,
                           width: w,
                         ),

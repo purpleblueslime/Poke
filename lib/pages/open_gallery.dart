@@ -123,6 +123,7 @@ class _OpenGallery extends State<OpenGallery> {
                           url: apiUrl(
                             '/poke/saved?id=${poke['id']}&token=${usr.token}',
                           ),
+                          id: poke['id'],
                           width: 160.0, // w 1080 in ':' (same-same)
                           height: 284.44, // h 1920 in ':' (same-same)
                         ),
