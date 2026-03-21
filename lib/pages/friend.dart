@@ -54,12 +54,11 @@ class _Friend extends State<Friend> {
           content: popUp(context, [
             ClipOval(
               child: ExtendedImage.network(
-                imgUrl(frnd['uid']),
+                imgUrl(frnd['uid'], frnd['updatedAt']),
                 height: 110,
                 width: 110,
                 fit: BoxFit.cover,
                 cache: true,
-                cacheMaxAge: Duration(days: 1),
                 loadStateChanged: (state) {
                   if (state.extendedImageLoadState == LoadState.completed) {
                     return null;
@@ -176,10 +175,9 @@ class _Friend extends State<Friend> {
                                   width: 100,
                                   height: 100,
                                   child: ExtendedImage.network(
-                                    imgUrl(frnd['uid']),
+                                    imgUrl(frnd['uid'], frnd['updatedAt']),
                                     fit: BoxFit.cover,
                                     cache: true,
-                                    cacheMaxAge: Duration(days: 1),
                                     loadStateChanged: (state) {
                                       if (state.extendedImageLoadState ==
                                           LoadState.completed) {

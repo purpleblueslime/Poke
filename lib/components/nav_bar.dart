@@ -162,12 +162,11 @@ class _NavBar extends State<NavBar> {
                   ),
                   child: ClipOval(
                     child: ExtendedImage.network(
-                      imgUrl(user['uid']),
+                      imgUrl(user['uid'], user['updatedAt']),
                       height: 50,
                       width: 50,
                       fit: BoxFit.cover,
                       cache: true,
-                      cacheMaxAge: Duration(days: 1),
                       loadStateChanged: (state) {
                         if (state.extendedImageLoadState ==
                             LoadState.completed) {

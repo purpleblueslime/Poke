@@ -77,6 +77,6 @@ apiUrl(p) {
   return '$url/api$p';
 }
 
-imgUrl(uid) {
-  return 'https://apunwzrlgvqzzhzenzqa.supabase.co/storage/v1/object/public/users/$uid.gif';
+imgUrl(uid, updatedAt) {
+  return 'https://apunwzrlgvqzzhzenzqa.supabase.co/storage/v1/object/public/users/$uid.gif?updatedAt=$updatedAt';
 }

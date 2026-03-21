@@ -89,12 +89,14 @@ class _Edit extends State<Edit> {
                                       child:
                                           userImage == null
                                               ? ExtendedImage.network(
-                                                imgUrl(user['uid']),
+                                                imgUrl(
+                                                  user['uid'],
+                                                  user['updatedAt'],
+                                                ),
                                                 height: 120,
                                                 width: 120,
                                                 fit: BoxFit.cover,
                                                 cache: true,
-                                                cacheMaxAge: Duration(days: 1),
                                                 loadStateChanged: (state) {
                                                   if (state
                                                           .extendedImageLoadState ==
@@ -212,7 +214,8 @@ class _Edit extends State<Edit> {
 
                                 if (nick.text == user['nick'] &&
                                     userImage == null) {
-                                  Navigator.pop(context, user);
+                                  Navigator.pop(context);
+                                  return; // hehe :)
                                 }
 
                                 dynamic re = await pMultipart(
@@ -234,17 +237,7 @@ class _Edit extends State<Edit> {
                                   return;
                                 }
 
-                                if (userImage != null) {
-                                  // idk smtimes without these it dont work
-                                  clearMemoryImageCache(imgUrl(user['uid']));
-
-                                  // actual cache clear
-                                  await ExtendedNetworkImageProvider(
-                                    imgUrl(user['uid']),
-                                  ).evict(includeLive: true);
-                                }
-                                usr.refresh();
-
+                                await usr.refresh();
                                 Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(

@@ -75,12 +75,11 @@ class _Search extends State<Search> {
           content: popUp(context, [
             ClipOval(
               child: ExtendedImage.network(
-                imgUrl(u['uid']),
+                imgUrl(u['uid'], u['updatedAt']),
                 height: 110,
                 width: 110,
                 fit: BoxFit.cover,
                 cache: true,
-                cacheMaxAge: Duration(days: 1),
                 loadStateChanged: (state) {
                   if (state.extendedImageLoadState == LoadState.completed) {
                     return null;
@@ -174,12 +173,11 @@ class _Search extends State<Search> {
                 children: [
                   ClipOval(
                     child: ExtendedImage.network(
-                      imgUrl(u['uid']),
+                      imgUrl(u['uid'], u['updatedAt']),
                       height: 72,
                       width: 72,
                       fit: BoxFit.cover,
                       cache: true,
-                      cacheMaxAge: Duration(days: 1),
                       loadStateChanged: (state) {
                         if (state.extendedImageLoadState ==
                             LoadState.completed) {

@@ -56,12 +56,11 @@ class _Chat extends State<Chat> {
                   children: [
                     ClipOval(
                       child: ExtendedImage.network(
-                        imgUrl(poke['by']['uid']),
+                        imgUrl(poke['by']['uid'], poke['by']['updatedAt']),
                         height: 72,
                         width: 72,
                         fit: BoxFit.cover,
                         cache: true,
-                        cacheMaxAge: Duration(days: 1),
                         loadStateChanged: (state) {
                           if (state.extendedImageLoadState ==
                               LoadState.completed) {
@@ -124,6 +123,34 @@ class _Chat extends State<Chat> {
                             ),
                           ],
                         ),
+                        poke['by']['streaks'] < 1
+                            ? SizedBox.shrink()
+                            : Container(
+                              margin: EdgeInsets.only(top: 3),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'images/tag.svg',
+                                    height: 16,
+                                    width: 16,
+                                    colorFilter: ColorFilter.mode(
+                                      Color(0xFF8FDBFF),
+                                      BlendMode.srcIn,
+                                    ),
+                                    alignment: Alignment.center,
+                                  ),
+                                  SizedBox(width: 3),
+                                  Text(
+                                    '${comify(poke['by']['streaks'])} days',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w900,
+                                      color: Color(0xFF8FDBFF),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                       ],
                     ),
                   ],

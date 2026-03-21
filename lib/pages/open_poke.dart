@@ -67,6 +67,7 @@ class _OpenPoke extends State<OpenPoke> {
                               '/poke/open?token=${userProvider.token}&id=${poke['id']}',
                             ),
                             cache: poke['allowSave'],
+                            cacheMaxAge: Duration(days: 1),
                             fit: BoxFit.cover,
                             loadStateChanged: (state) {
                               if (state.extendedImageLoadState ==
@@ -278,12 +279,11 @@ class _OpenPoke extends State<OpenPoke> {
                     },
                     child: ClipOval(
                       child: ExtendedImage.network(
-                        imgUrl(poke['by']['uid']),
+                        imgUrl(poke['by']['uid'], poke['by']['updatedAt']),
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
                         cache: true,
-                        cacheMaxAge: Duration(days: 1),
                         loadStateChanged: (state) {
                           if (state.extendedImageLoadState ==
                               LoadState.completed) {

@@ -61,12 +61,11 @@ class _OpenGallery extends State<OpenGallery> {
           },
           child: ClipOval(
             child: ExtendedImage.network(
-              imgUrl(u['uid']),
+              imgUrl(u['uid'], u['updatedAt']),
               width: 80,
               height: 80,
               fit: BoxFit.cover,
               cache: true,
-              cacheMaxAge: Duration(days: 1),
               loadStateChanged: (state) {
                 if (state.extendedImageLoadState == LoadState.completed) {
                   return null;
@@ -492,12 +491,14 @@ class _OpenGallery extends State<OpenGallery> {
                           },
                           child: ClipOval(
                             child: ExtendedImage.network(
-                              imgUrl(poke['by']['uid']),
+                              imgUrl(
+                                poke['by']['uid'],
+                                poke['by']['updatedAt'],
+                              ),
                               width: 80,
                               height: 80,
                               fit: BoxFit.cover,
                               cache: true,
-                              cacheMaxAge: Duration(days: 1),
                               loadStateChanged: (state) {
                                 if (state.extendedImageLoadState ==
                                     LoadState.completed) {

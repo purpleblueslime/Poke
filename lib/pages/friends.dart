@@ -35,12 +35,11 @@ class _Friends extends State<Friends> {
               children: [
                 ClipOval(
                   child: ExtendedImage.network(
-                    imgUrl(u['uid']),
+                    imgUrl(u['uid'], u['updatedAt']),
                     height: 72,
                     width: 72,
                     fit: BoxFit.cover,
                     cache: true,
-                    cacheMaxAge: Duration(days: 1),
                     loadStateChanged: (state) {
                       if (state.extendedImageLoadState == LoadState.completed) {
                         return null;

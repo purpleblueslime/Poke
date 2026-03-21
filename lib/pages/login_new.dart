@@ -99,6 +99,7 @@ class _LoginNew extends State<LoginNew> {
                                 ),
                               ),
                               child: Stack(
+                                alignment: Alignment.center,
                                 children: [
                                   userImage == null
                                       ? SizedBox.shrink()
@@ -110,21 +111,21 @@ class _LoginNew extends State<LoginNew> {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                  Center(
-                                    child: SizedBox.expand(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(0.4),
-                                          borderRadius: BorderRadius.circular(
-                                            50,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.add_rounded,
-                                          color: Colors.white,
-                                          size: 40,
-                                        ),
+                                  Positioned.fill(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.4),
+                                        shape: BoxShape.circle,
                                       ),
+                                    ),
+                                  ),
+                                  SvgPicture.asset(
+                                    'images/add.svg',
+                                    height: 40,
+                                    width: 40,
+                                    colorFilter: const ColorFilter.mode(
+                                      Colors.white,
+                                      BlendMode.srcIn,
                                     ),
                                   ),
                                 ],

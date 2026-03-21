@@ -56,12 +56,11 @@ class _Me extends State<Me> {
                                 children: [
                                   ClipOval(
                                     child: ExtendedImage.network(
-                                      imgUrl(user['uid']),
+                                      imgUrl(user['uid'], user['updatedAt']),
                                       height: 100,
                                       width: 100,
                                       fit: BoxFit.cover,
                                       cache: true,
-                                      cacheMaxAge: Duration(days: 1),
                                       loadStateChanged: (state) {
                                         if (state.extendedImageLoadState ==
                                             LoadState.completed) {

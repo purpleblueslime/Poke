@@ -191,12 +191,11 @@ class _SendPoke extends State<SendPoke> {
                 children: [
                   ClipOval(
                     child: ExtendedImage.network(
-                      imgUrl(friend['uid']),
+                      imgUrl(friend['uid'], friend['updatedAt']),
                       height: 72,
                       width: 72,
                       fit: BoxFit.cover,
                       cache: true,
-                      cacheMaxAge: Duration(days: 1),
                       loadStateChanged: (state) {
                         if (state.extendedImageLoadState ==
                             LoadState.completed) {
