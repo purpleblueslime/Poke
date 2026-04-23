@@ -78,7 +78,7 @@ class _Edit extends State<Edit> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: Colors.white,
+                                    color: Colors.white.withOpacity(0.1),
                                     width: 5,
                                   ),
                                 ),
@@ -126,7 +126,7 @@ class _Edit extends State<Edit> {
                                       'images/add.svg',
                                       height: 40,
                                       width: 40,
-                                      colorFilter: const ColorFilter.mode(
+                                      colorFilter: ColorFilter.mode(
                                         Colors.white,
                                         BlendMode.srcIn,
                                       ),

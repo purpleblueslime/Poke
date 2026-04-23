@@ -94,7 +94,7 @@ class _LoginNew extends State<LoginNew> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Colors.white,
+                                  color: Colors.white.withOpacity(0.1),
                                   width: 5,
                                 ),
                               ),
