@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:flutter_svg/svg.dart';
 
 popUp(ctx, widget) {
   return SizedBox(
-    height: 450,
+    height: 550,
     width: double.infinity,
     child: Container(
       decoration: BoxDecoration(
@@ -21,9 +22,23 @@ popUp(ctx, widget) {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [...widget],
+            children: [
+              SvgPicture.asset(
+                'images/down.svg',
+                height: 50,
+                width: 50,
+                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                alignment: Alignment.center,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [...widget],
+              ),
+              SizedBox(height: 50),
+            ],
           ),
         ),
       ),

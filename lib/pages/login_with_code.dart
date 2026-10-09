@@ -65,7 +65,7 @@ class _LoginWithCode extends State<LoginWithCode> {
                       child: Column(
                         children: [
                           Text(
-                            'We\'ve send you OTP',
+                            'We\'ve send you otp',
                             style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.w900,
@@ -97,7 +97,7 @@ class _LoginWithCode extends State<LoginWithCode> {
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                     ),
-                                    hintText: 'OTP',
+                                    hintText: 'otp',
                                     hintStyle: TextStyle(
                                       fontSize: 19,
                                       fontWeight: FontWeight.w900,

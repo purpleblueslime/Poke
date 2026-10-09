@@ -1,6 +1,6 @@
 name: poke
 
-version: 1.9.9+99
+version: 1.10.0+100
 
 environment:
   sdk: '>=3.7.0 <4.0.0'

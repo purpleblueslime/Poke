@@ -5,7 +5,7 @@ import '../components/error.dart';
 import '../components/safe_bar.dart';
 import '../components/call_api.dart';
 import './login_with_code.dart';
-import './login_new.dart';
+import './login_new/nick.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -171,7 +171,7 @@ class _LogIn extends State<LogIn> {
                                     context,
                                     MaterialPageRoute(
                                       builder:
-                                          (context) => LoginNew(
+                                          (context) => LoginNewNick(
                                             email: email.text.trim(),
                                           ),
                                     ),
